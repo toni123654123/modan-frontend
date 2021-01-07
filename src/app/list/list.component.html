@@ -1,0 +1,56 @@
+<div class="container-xl">
+  <h2>List User</h2>
+  <div class="text-right mb-3">
+    <button type="button" class="btn btn-info"
+            (click)="openModal(template)">Create User</button>
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Create User</h4>
+        <button type="button" class="close pull-right"
+                aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="newUF" (ngSubmit)="create()">
+      <div class="modal-body">
+        <input formControlName="username" type="text" class="form-control" id="username"
+               placeholder="Enter username">
+        <br>
+        <input formControlName="email" type="text" class="form-control" id="email"
+               placeholder="Enter email">
+        <br>
+        <input formControlName="password" type="password" class="form-control" id="password"
+               placeholder="Enter password">
+        <br>
+        <button (click)="modalRef.hide()" type="submit">Create</button>
+      </div>
+      </form>
+    </ng-template>
+  </div>
+
+
+  <table class="table table-light">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>UserName</td>
+      <td>Email</td>
+      <td>Password</td>
+      <td>Action</td>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of List">
+      <td>{{ user.id}}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.password }}</td>
+      <td>
+        <button [routerLink]="['/edit', user.id]" class="btn btn-sm btn-outline-info">Edit</button>
+        <button (click)="delete(user.id)" class="btn btn-sm btn-outline-danger ml-1">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
